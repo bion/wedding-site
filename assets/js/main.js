@@ -197,7 +197,16 @@
 
     var $rsvpForm = $('form.rsvp-form')
 
-    $rsvpForm.submit(function(event) {
+    function failure() {
+      $rsvpForm.off();
+      $rsvpForm.submit();
+    }
+
+    function success() {
+      window.location = '/rsvp-confirmation.html';
+    }
+
+    $rsvpForm.on('submit', function(event) {
       event.stopPropagation();
       event.preventDefault();
 
@@ -205,10 +214,9 @@
         url: "/api/report-rsvp",
         type: 'POST',
         data: $rsvpForm.serialize(),
-        timeout: 2000
-      }).always(function() {
-        $rsvpForm.off();
-        $rsvpForm.submit();
+        timeout: 2000,
+        success: success,
+        error: failure
       })
     })
 
