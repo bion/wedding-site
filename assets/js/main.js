@@ -206,7 +206,10 @@
         type: 'POST',
         data: $rsvpForm.serialize(),
         timeout: 2000
-      }).always($rsvpForm.submit())
+      }).always(function() {
+        $rsvpForm.off();
+        $rsvpForm.submit();
+      })
     })
 
   });
