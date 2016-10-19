@@ -1,0 +1,25 @@
+{
+  "name": "wedding-site",
+  "version": "1.0.0",
+  "private": true,
+  "repo": "https://bitbucket.org/bion/wedding-site.git",
+  "_aerobatic": {
+    "clientConfigVar": "_global",
+    "omitClientConfigVar": true,
+    "router": [
+      {
+        "path": "/api/report-rsvp",
+        "module": "express-request-proxy",
+        "options": {
+          "url": "http://www.rsvp.johnxin.party/rsvp"
+        }
+      },
+      {
+        "module": "webpage"
+      }
+    ],
+    "build": {
+      "engine": ""
+    }
+  }
+}

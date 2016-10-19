@@ -194,6 +194,21 @@
       var link = $('a[href="' + window.location.hash + '"]')[0];
       if (link) link.click();
     }
+
+    var $rsvpForm = $('form.rsvp-form')
+
+    $rsvpForm.submit(function(event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      $.ajax({
+        url: "/api/report-rsvp",
+        type: 'POST',
+        data: $rsvpForm.serialize(),
+        timeout: 2000
+      }).always($rsvpForm.submit())
+    })
+
   });
 
 })(jQuery);
