@@ -67,6 +67,68 @@
     locked = false;
 
     // Click event.
+
+		function navigateTo(id) {
+			var $panel = $(id);
+			var delay = 0;
+
+      // Locked? Bail.
+      if (locked) return;
+
+      // Lock.
+      locked = true;
+
+      // Delay.
+      window.setTimeout(function() {
+
+        // Deactivate all panels.
+        $panels.addClass('inactive');
+
+        // Deactivate footer.
+        $footer.addClass('inactive');
+
+        // Delay.
+        window.setTimeout(function() {
+
+          // Hide all panels.
+          $panels.hide();
+
+          // Show target panel.
+          $panel.show();
+
+          // Reset scroll.
+          $document.scrollTop(0);
+
+          // Delay.
+          window.setTimeout(function() {
+
+            // Activate target panel.
+            $panel.removeClass('inactive');
+
+            // Unlock.
+            locked = false;
+
+            // IE: Refresh.
+            $window.triggerHandler('--refresh');
+
+            window.setTimeout(function() {
+
+              // Activate footer.
+              $footer.removeClass('inactive');
+
+            }, 250);
+
+          }, 100);
+
+        }, 350);
+
+      }, delay);
+		}
+
+		window.onhashchange = function() {
+			navigateTo(window.location.hash || "#home");
+		}
+
     $('a[href^="#"]').on('click', function(event) {
       var $this = $(this),
           id = $this.attr('href'),
@@ -169,8 +231,8 @@
 
           var $panel = $('.panel').not('.inactive'),
               $image = $panel.find('.image'),
-          $content = $panel.find('.content'),
-          ih = $image.height(),
+							$content = $panel.find('.content'),
+							ih = $image.height(),
               ch = $content.height(),
               x = Math.max(ih, ch);
 
