@@ -1,0 +1,10 @@
+# Aerobatic website manifest
+id: 8aa3c642-39ff-4c93-b562-5946779d94e2
+clientConfigVar: _global
+omitClientConfigVar: true
+plugins:
+  - path: /api/report-rsvp
+    options:
+      url: 'http://www.rsvp.johnxin.party/rsvp'
+    name: http-proxy
+  - name: webpage
